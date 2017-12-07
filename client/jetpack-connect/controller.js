@@ -158,12 +158,13 @@ export default {
 
 		if ( validQueryObject ) {
 			const transformedQuery = authQueryTransformer( queryObject );
-			// No longer setting/persisting queryObject
-			// However, from is required for some reducer logic :(
+
 			// FIXME
+			// JETPACK_CONNECT_QUERY_SET is a misnomer. We no longer store the queryObject.
+			// This is required for some authAuthorize logic that is persisted in state
 			context.store.dispatch( {
 				type: JETPACK_CONNECT_QUERY_SET,
-				queryObject: { from: context.query.from },
+				from: context.query.from,
 			} );
 
 			analytics.pageView.record( analyticsBasePath, analyticsPageTitle );
